@@ -31,6 +31,19 @@
       overflow-x: hidden;
     }
 
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+    nav, section, footer { position: relative; z-index: 1; }
+
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -61,7 +74,21 @@
       justify-content: center;
       align-items: flex-start;
       padding: 0 8vw;
+      position: relative;
+      overflow: hidden;
     }
+    /* #1 Hero 배경 — radial gradient glow */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 55% at 15% 50%, rgba(0,212,255,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 40% at 75% 30%, rgba(124,58,237,.08) 0%, transparent 65%);
+    }
+    #hero > * { position: relative; z-index: 1; }
     .hero-eyebrow {
       font-size: .8rem;
       letter-spacing: .25em;
@@ -69,11 +96,17 @@
       color: var(--accent);
       margin-bottom: 1.5rem;
     }
+    /* #4 Hero 타이포 위계 */
     .hero-title {
       font-size: clamp(2.2rem, 6vw, 5rem);
-      font-weight: 700;
+      font-weight: 300;
       line-height: 1.15;
       margin-bottom: 1rem;
+      letter-spacing: -.01em;
+    }
+    .hero-title .typing-wrap {
+      font-weight: 700;
+      display: block;
     }
     .typing-line {
       color: var(--accent2);
@@ -143,10 +176,11 @@
       margin-bottom: 2.5rem;
       line-height: 1.2;
     }
+    /* #5 Divider 개선 — fade-out 긴 라인 */
     .divider {
-      width: 3rem;
-      height: 2px;
-      background: linear-gradient(to right, var(--accent), var(--accent2));
+      width: min(20rem, 60%);
+      height: 1px;
+      background: linear-gradient(to right, var(--accent), var(--accent2) 40%, transparent);
       margin-bottom: 2.5rem;
     }
 
@@ -163,16 +197,18 @@
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.2rem;
     }
+    /* #2 카드 hover — glow + scale */
     .mbti-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 1rem;
       padding: 1.6rem;
-      transition: border-color .3s, transform .3s;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
     }
     .mbti-card:hover {
       border-color: var(--accent2);
-      transform: translateY(-4px);
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 12px 40px rgba(124,58,237,.2), 0 0 0 1px rgba(124,58,237,.15);
     }
     .mbti-type {
       font-size: 1.6rem;
@@ -195,7 +231,7 @@
       border: 1px solid var(--border);
       border-radius: 1rem;
       padding: 1.8rem;
-      transition: border-color .3s, transform .3s;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
       position: relative;
       overflow: hidden;
     }
@@ -209,7 +245,12 @@
       transition: opacity .3s;
     }
     .act-card:hover::before { opacity: 1; }
-    .act-card:hover { border-color: transparent; transform: translateY(-4px); }
+    /* #2 Activities 카드 hover glow */
+    .act-card:hover {
+      border-color: transparent;
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 12px 40px rgba(0,212,255,.15), 0 0 0 1px rgba(0,212,255,.1);
+    }
     .act-icon { font-size: 1.8rem; margin-bottom: 1rem; }
     .act-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; }
     .act-body  { font-size: .9rem; color: var(--muted); line-height: 1.7; }
@@ -224,9 +265,14 @@
       border: 1px solid var(--border);
       border-radius: 1rem;
       padding: 1.4rem 1.6rem;
-      transition: border-color .3s;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
     }
-    .int-item:hover { border-color: var(--accent); }
+    /* #2 Interests 카드 hover glow */
+    .int-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 10px 35px rgba(0,212,255,.12), 0 0 0 1px rgba(0,212,255,.1);
+    }
     .int-emoji { font-size: 2rem; flex-shrink: 0; }
     .int-text-title { font-weight: 700; margin-bottom: .3rem; font-size: 1rem; }
     .int-text-desc  { font-size: .9rem; color: var(--muted); line-height: 1.7; }
@@ -265,6 +311,15 @@
       transform: translateY(0);
     }
 
+    /* #3 섹션 배경 교차 */
+    #activities {
+      background: #131313;
+      max-width: 100%;
+      padding-left: 8vw;
+      padding-right: 8vw;
+    }
+    #activities > * { max-width: 1000px; margin-left: auto; margin-right: auto; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { gap: 1.2rem; padding: 1rem 1.4rem; }
@@ -287,7 +342,7 @@
     <p class="hero-eyebrow">Hello, World 👋</p>
     <h1 class="hero-title">
       안녕하세요,<br>
-      <span class="typing-line" id="typing-target"></span><span class="cursor"></span>
+      <span class="typing-wrap"><span class="typing-line" id="typing-target"></span><span class="cursor"></span></span>
     </h1>
     <p class="hero-sub">
       AI와 기술을 사람들에게 전달하는 일을 합니다.<br>
