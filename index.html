@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 강사 자기소개</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f0f0f;
+      --surface: #1a1a1a;
+      --border:  #2a2a2a;
+      --text:    #e5e5e5;
+      --muted:   #888;
+      --accent:  #00d4ff;
+      --accent2: #7c3aed;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+      padding: 1.2rem 2.5rem;
+      background: rgba(15,15,15,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      font-size: .85rem;
+      letter-spacing: .05em;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .25s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 8vw;
+    }
+    .hero-eyebrow {
+      font-size: .8rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .typing-line {
+      color: var(--accent2);
+      min-height: 1.2em;
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: .9em;
+      background: var(--accent);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 46ch;
+    }
+    .badge-row { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .badge {
+      padding: .35rem .9rem;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+    .badge-cyan  { border: 1px solid var(--accent);  color: var(--accent); }
+    .badge-violet{ border: 1px solid var(--accent2); color: var(--accent2); }
+
+    .scroll-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .1em;
+    }
+    .scroll-hint .arrow {
+      width: 1px;
+      height: 2.5rem;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: drop 1.5s ease-in-out infinite;
+    }
+    @keyframes drop { 0%,100%{ transform:translateY(-6px); opacity:.4; } 50%{ transform:translateY(6px); opacity:1; } }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 8vw;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: .75rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      line-height: 1.2;
+    }
+    .divider {
+      width: 3rem;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-intro {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.9;
+    }
+    .mbti-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .mbti-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.6rem;
+      transition: border-color .3s, transform .3s;
+    }
+    .mbti-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-4px);
+    }
+    .mbti-type {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      margin-bottom: .4rem;
+    }
+    .mbti-type.cyan  { color: var(--accent); }
+    .mbti-type.violet{ color: var(--accent2); }
+    .mbti-desc { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── ACTIVITIES ── */
+    .act-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .act-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.8rem;
+      transition: border-color .3s, transform .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .act-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .act-card:hover::before { opacity: 1; }
+    .act-card:hover { border-color: transparent; transform: translateY(-4px); }
+    .act-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .act-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; }
+    .act-body  { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── INTERESTS ── */
+    .int-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .int-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.4rem 1.6rem;
+      transition: border-color .3s;
+    }
+    .int-item:hover { border-color: var(--accent); }
+    .int-emoji { font-size: 2rem; flex-shrink: 0; }
+    .int-text-title { font-weight: 700; margin-bottom: .3rem; font-size: 1rem; }
+    .int-text-desc  { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+
+    .nepal-tag {
+      display: inline-block;
+      margin-top: .5rem;
+      padding: .2rem .65rem;
+      background: rgba(0,212,255,.1);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--muted);
+      font-size: .82rem;
+      letter-spacing: .05em;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── FADE-IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { gap: 1.2rem; padding: 1rem 1.4rem; }
+      section { padding: 5rem 6vw; }
+      #hero { padding: 0 6vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#about">소개</a>
+    <a href="#activities">활동</a>
+    <a href="#interests">관심사</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">Hello, World 👋</p>
+    <h1 class="hero-title">
+      안녕하세요,<br>
+      <span class="typing-line" id="typing-target"></span><span class="cursor"></span>
+    </h1>
+    <p class="hero-sub">
+      AI와 기술을 사람들에게 전달하는 일을 합니다.<br>
+      배움과 탐험을 좋아하는 사람입니다.
+    </p>
+    <div class="badge-row">
+      <span class="badge badge-cyan">INFJ</span>
+      <span class="badge badge-violet">INTJ</span>
+      <span class="badge badge-cyan">AI 강사</span>
+      <span class="badge badge-violet">기술 번역가</span>
+    </div>
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label fade-in">About</p>
+    <h2 class="section-title fade-in">저는 이런 사람입니다</h2>
+    <div class="divider fade-in"></div>
+    <p class="about-intro fade-in">
+      AI 기술을 누구나 이해할 수 있도록 쉽게 전달하는 강사입니다.<br>
+      새로운 것을 탐구하고 깊이 이해하는 것을 즐깁니다.<br>
+      INFJ와 INTJ의 성향을 함께 가진, 분석적이면서도 공감 능력이 높은 사람입니다.
+    </p>
+    <div class="mbti-grid">
+      <div class="mbti-card fade-in">
+        <div class="mbti-type cyan">INFJ</div>
+        <p class="mbti-desc">
+          옹호자형. 이상을 현실로 만드는 것을 좋아하며,<br>
+          다른 사람을 돕고 의미 있는 일에 집중합니다.<br>
+          조용하지만 강한 신념을 가집니다.
+        </p>
+      </div>
+      <div class="mbti-card fade-in">
+        <div class="mbti-type violet">INTJ</div>
+        <p class="mbti-desc">
+          전략가형. 복잡한 문제를 체계적으로 분석하고<br>
+          독립적으로 생각하며 장기적 계획을 세웁니다.<br>
+          효율과 깊이를 중시합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities">
+    <p class="section-label fade-in">Activities</p>
+    <h2 class="section-title fade-in">주요 활동</h2>
+    <div class="divider fade-in"></div>
+    <div class="act-grid">
+      <div class="act-card fade-in">
+        <div class="act-icon">🤖</div>
+        <div class="act-title">AI 강의</div>
+        <p class="act-body">
+          AI 관련 기술과 개념을 현장에서 직접 강의합니다.<br>
+          복잡한 내용을 명확하고 실용적으로 전달하는 데 집중합니다.
+        </p>
+      </div>
+      <div class="act-card fade-in">
+        <div class="act-icon">🏫</div>
+        <div class="act-title">ICT 과정 강사</div>
+        <p class="act-body">
+          현재 ICT 교육 과정에서 수강생들에게<br>
+          최신 기술 트렌드와 실무 역량을 가르치고 있습니다.
+        </p>
+      </div>
+      <div class="act-card fade-in">
+        <div class="act-icon">📚</div>
+        <div class="act-title">기술 번역</div>
+        <p class="act-body">
+          기술 서적 2권의 번역을 수행했습니다.<br>
+          원문의 기술적 정확성을 유지하면서도<br>
+          자연스러운 한국어로 풀어내는 작업입니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <p class="section-label fade-in">Interests</p>
+    <h2 class="section-title fade-in">관심사 &amp; 일상</h2>
+    <div class="divider fade-in"></div>
+    <div class="int-list">
+      <div class="int-item fade-in">
+        <div class="int-emoji">📖</div>
+        <div>
+          <div class="int-text-title">웹툰 감상</div>
+          <p class="int-text-desc">
+            바쁜 일상 속에서 가끔 웹툰을 보며 쉬어갑니다.<br>
+            짧은 이야기 속에서 재미와 감동을 찾는 소소한 취미입니다.
+          </p>
+        </div>
+      </div>
+      <div class="int-item fade-in">
+        <div class="int-emoji">🏃</div>
+        <div>
+          <div class="int-text-title">마라톤</div>
+          <p class="int-text-desc">
+            마라톤을 한두 번 완주한 경험이 있습니다.<br>
+            긴 거리를 묵묵히 뛰는 것은 많은 것을 가르쳐 주었습니다.<br>
+            포기하지 않는 힘, 그리고 나 자신과의 대화.
+          </p>
+        </div>
+      </div>
+      <div class="int-item fade-in">
+        <div class="int-emoji">🏔️</div>
+        <div>
+          <div class="int-text-title">네팔 여행 예정</div>
+          <p class="int-text-desc">
+            올해 8월 전후로 네팔에 방문할 계획입니다.<br>
+            히말라야의 풍경과 현지 문화를 직접 경험하고 싶습니다.
+          </p>
+          <span class="nepal-tag">2026년 8월 예정</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with <span>♥</span> · AI 강사 자기소개 페이지</p>
+  </footer>
+
+  <script>
+    // ── Typing effect ──
+    const phrases = ['AI 강사입니다.', 'ICT 강사입니다.', '기술 번역가입니다.'];
+    const target = document.getElementById('typing-target');
+    let pi = 0, ci = 0, deleting = false;
+
+    function type() {
+      const phrase = phrases[pi];
+      if (!deleting) {
+        target.textContent = phrase.slice(0, ++ci);
+        if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; }
+        setTimeout(type, 80);
+      } else {
+        target.textContent = phrase.slice(0, --ci);
+        if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 400); return; }
+        setTimeout(type, 45);
+      }
+    }
+    type();
+
+    // ── Fade-in on scroll ──
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.fade-in').forEach((el, i) => {
+      el.style.transitionDelay = (i % 4) * 0.1 + 's';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
